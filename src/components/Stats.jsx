@@ -27,8 +27,10 @@ export default function Stats({ voteCounts, totalVotes, pollData }) {
 
     const { highestOptions, highestPercentage } = getHighestPercentageOptions();
     return (
-        <div className='bg-white p-10 h-full'>
-            <h2 className='text-3xl font-bold pb-8 border-b mb-5 pt-4'>জনমত</h2>
+        <div className='bg-white p-8 xl:p-14  h-full'>
+            <h2 className='text-3xl font-bold pb-6 xl:pb-8 border-b mb-5 xl:pt-4'>
+                জনমত
+            </h2>
             {pollData && pollData.length > 0 ? (
                 <div>
                     {pollData.map((vote) => (
@@ -46,14 +48,14 @@ export default function Stats({ voteCounts, totalVotes, pollData }) {
                                     styles={{
                                         backgroundColor:
                                             index === 0
-                                                ? '#0000ff' // Blue for the first option
+                                                ? '#0000ff'
                                                 : index === 1
-                                                ? '#ff0000' // Red for the second option
+                                                ? '#ff0000'
                                                 : index === 2
-                                                ? '#ffa500' // Orange for the third option
+                                                ? '#ffa500'
                                                 : index === 3
-                                                ? '#0cbd06' // Green for the fourth option
-                                                : '', // Default color for any other options
+                                                ? '#0cbd06'
+                                                : '',
 
                                         borderRadius: '4px',
                                     }}
@@ -65,7 +67,7 @@ export default function Stats({ voteCounts, totalVotes, pollData }) {
             ) : (
                 <p>No polls available</p>
             )}
-            <div className='mt-20'>
+            <div className='mt-10 xl:mt-20'>
                 <p>
                     {totalVotes === 0 ? (
                         <>

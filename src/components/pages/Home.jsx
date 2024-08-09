@@ -33,8 +33,8 @@ export default function Home() {
     };
     return (
         <>
-            <div className='container mx-auto grid grid-cols-12 gap-6 py-20'>
-                <div className='col-span-7'>
+            <div className='container mx-auto xl:grid xl:grid-cols-12 gap-6 py-20 px-10 xl:px-0 '>
+                <div className='xl:col-span-7 mb-10 xl:mb-0'>
                     <PollCard
                         pollData={pollData}
                         voteCounts={voteCounts}
@@ -42,7 +42,7 @@ export default function Home() {
                         onVote={handleVote}
                     />{' '}
                 </div>
-                <div className='col-span-5'>
+                <div className='xl:col-span-5'>
                     <Stats
                         voteCounts={voteCounts}
                         totalVotes={totalVotes}
@@ -50,14 +50,14 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <div className='bg-white py-32'>
+            <div className='bg-white py-12 xl:py-32 px-8 xl:px-0'>
                 <div className=' container mx-auto'>
-                    <h2 className='text-2xl font-semibold mb-14 pb-2 inline-block border-b-2 border-indigo-500'>
+                    <h2 className='text-2xl font-semibold mb-10 xl:mb-14 pb-2 inline-block border-b-2 border-indigo-500'>
                         সর্বশেষ ভোটিং স্ট্যাটস
                     </h2>
 
-                    <div className='grid grid-cols-3 gap-6'>
-                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg'>
+                    <div className='xl:grid xl:grid-cols-3 gap-6 '>
+                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg mb-6 xl:my-0'>
                             <h2 className='text-lg font-semibold border-b pb-2'>
                                 কে বেশি ভয়ানক?
                             </h2>
@@ -92,7 +92,7 @@ export default function Home() {
                             />
                         </div>
                         {/* ... */}
-                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg'>
+                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg mb-6 xl:my-0'>
                             <h2 className='text-lg font-semibold border-b pb-2'>
                                 কে বেশি ভয়ানক?
                             </h2>
@@ -127,7 +127,7 @@ export default function Home() {
                             />
                         </div>
                         {/* ... */}
-                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg'>
+                        <div className='col-span-1 bg-gray-100 p-6 rounded-lg mb-6 xl:my-0'>
                             <h2 className='text-lg font-semibold border-b pb-2'>
                                 কে বেশি ভয়ানক?
                             </h2>

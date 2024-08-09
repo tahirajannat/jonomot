@@ -11,7 +11,7 @@ export default function PollCard({ pollData, voteCounts, totalVotes, onVote }) {
             {pollData.length > 0 ? (
                 pollData.slice(0, 2).map((data) => (
                     <div key={data.id}>
-                        <h2 className='text-3xl font-bold pb-8 border-b mb-5 p-14'>
+                        <h2 className='text-3xl font-bold xl:pb-8 border-b xl:mb-5 p-8 xl:p-14'>
                             {data.poll_title}
                             <span className='block text-sm mt-3 font-normal text-indigo-500'>
                                 আপনার একান্ত নিজস্ব মতামত প্রত্যাশিত
@@ -19,7 +19,7 @@ export default function PollCard({ pollData, voteCounts, totalVotes, onVote }) {
                         </h2>
 
                         <fieldset aria-label='Poll options'>
-                            <div className='-space-y-px rounded-md bg-white p-14 mb-5'>
+                            <div className='-space-y-px rounded-md bg-white p-8 xl:p-14 xl:mb-5'>
                                 {data.poll_options.map((option) => (
                                     <label
                                         key={option.id}

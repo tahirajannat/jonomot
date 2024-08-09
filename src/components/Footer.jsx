@@ -3,19 +3,19 @@ import Social from './common/Social';
 export default function Footer() {
     return (
         <section className=' bg-gray-200 relative '>
-            <div className=' container mx-auto flex justify-between py-14'>
-                <div className='-mt-2'>
-                    <a href='https://flowbite.com' className='flex '>
+            <div className=' container mx-auto md:flex gap-6 justify-between py-14 text-center xl:text-left'>
+                <div className='-mt-2 xl:w-2/4 mr-6 text-center xl:text-left'>
+                    <a href='https://flowbite.com' className='flex   '>
                         {/* <img
                             src={Logo}
                             className='mr-3 sm:h-20 h-6 '
                             alt='Flowbite Logo'
                         /> */}
-                        <span className='text-indigo-600 text-2xl font-bold'>
+                        <span className='text-indigo-600 text-2xl font-bold '>
                             জনমত
                         </span>
                     </a>
-                    <div className='mt-4 w-2/4'>
+                    <div className='mt-4'>
                         <p className=' leading-8'>
                             Lorem ipsum dolor sit amet, consectetuer adipiscing
                             elit, sed diam nonummynibh euismod tincidunt ut
