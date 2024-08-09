@@ -42,12 +42,12 @@ export default function PollCard({ pollData, voteCounts, totalVotes, onVote }) {
                                             <span className='block text-base font-medium'>
                                                 {option.option}
                                             </span>
-                                            <span className='text-sm text-gray-500'>
+                                            {/* <span className='text-sm text-gray-500'>
                                                 {calculatePercentage(
                                                     option.id
                                                 ).toFixed(2)}
                                                 % of votes
-                                            </span>
+                                            </span> */}
                                         </span>
                                     </label>
                                 ))}

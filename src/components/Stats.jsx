@@ -42,7 +42,7 @@ export default function Stats({ voteCounts, totalVotes, pollData }) {
                                     stats={option.option}
                                     completedPercentage={`${calculatePercentage(
                                         option.id
-                                    ).toFixed(2)}%`}
+                                    ).toFixed(0)}%`}
                                     styles={{
                                         backgroundColor:
                                             index === 0
