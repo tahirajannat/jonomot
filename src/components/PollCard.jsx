@@ -8,11 +8,11 @@ export default function PollCard({ pollData, voteCounts, totalVotes, onVote }) {
 
     return (
         <div className='bg-white rounded-md'>
-            {pollData.length > 0 ? (
-                pollData.slice(0, 2).map((data) => (
-                    <div key={data.id}>
+            {pollData && pollData.length > 0 ? (
+                pollData.slice(0, 1).map((data) => (
+                    <div key={data.question_id}>
                         <h2 className='text-3xl font-bold xl:pb-8 border-b xl:mb-5 p-8 xl:p-14'>
-                            {data.poll_title}
+                            {data.title}
                             <span className='block text-sm mt-3 font-normal text-indigo-500'>
                                 আপনার একান্ত নিজস্ব মতামত প্রত্যাশিত
                             </span>
@@ -20,34 +20,42 @@ export default function PollCard({ pollData, voteCounts, totalVotes, onVote }) {
 
                         <fieldset aria-label='Poll options'>
                             <div className='-space-y-px rounded-md bg-white p-8 xl:p-14 xl:mb-5'>
-                                {data.poll_options.map((option) => (
+                                {data.options.map((option) => (
                                     <label
-                                        key={option.id}
-                                        aria-label={option.option}
-                                        aria-description='Please select your preferred option'
+                                        key={option.option_id}
+                                        aria-label={option.title}
+                                        aria-describedby={`poll-option-${option.option_id}`}
                                         className={`relative flex cursor-pointer border p-4 focus:outline-none ${
-                                            voteCounts[option.id]
+                                            voteCounts[option.option_id]
                                                 ? 'bg-indigo-50 ring-1 ring-indigo-300'
                                                 : ''
                                         }`}
                                     >
                                         <input
                                             type='radio'
-                                            name={`poll-${data.id}`}
-                                            value={option.id}
-                                            onChange={() => onVote(option.id)}
+                                            name={`poll-${data.question_id}`}
+                                            value={option.option_id}
+                                            checked={
+                                                voteCounts[option.option_id] > 0
+                                            }
+                                            onChange={() =>
+                                                onVote(option.option_id)
+                                            }
                                             className='mt-[0.30rem] h-4 w-4 shrink-0 cursor-pointer text-indigo-600 focus:ring-none focus:ring-0 outline-none active:ring-offset-0'
                                         />
                                         <span className='ml-3 flex flex-col'>
                                             <span className='block text-base font-medium'>
-                                                {option.option}
+                                                {option.title}
                                             </span>
-                                            {/* <span className='text-sm text-gray-500'>
+                                            <span
+                                                id={`poll-option-${option.option_id}`}
+                                                className='text-sm text-gray-500'
+                                            >
                                                 {calculatePercentage(
-                                                    option.id
+                                                    option.option_id
                                                 ).toFixed(2)}
                                                 % of votes
-                                            </span> */}
+                                            </span>
                                         </span>
                                     </label>
                                 ))}

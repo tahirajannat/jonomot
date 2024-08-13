@@ -7,19 +7,41 @@ export default function Home() {
     const [voteCounts, setVoteCounts] = useState({});
     const [totalVotes, setTotalVotes] = useState(0);
     const [pollData, setPollData] = useState([]);
-
     useEffect(() => {
-        fetch('/pollData.json')
+        fetch('http://jonomot.nisalman.com/api/questions')
             .then((response) => response.json())
             .then((data) => {
-                setPollData(data);
-                const initialCounts = {};
-                data.forEach((poll) => {
-                    poll.poll_options.forEach((option) => {
-                        initialCounts[option.id] = 0;
+                if (data.success && Array.isArray(data.data)) {
+                    const polls = data.data;
+                    setPollData(polls);
+
+                    // Initialize vote counts
+                    const initialCounts = {};
+                    let totalVoteCount = 0;
+
+                    polls.forEach((poll) => {
+                        if (
+                            Array.isArray(poll.options) &&
+                            poll.options.length > 0
+                        ) {
+                            poll.options.forEach((option) => {
+                                initialCounts[option.option_id] =
+                                    option.vote || 0;
+                                totalVoteCount += option.vote || 0;
+                            });
+                        } else {
+                            console.warn(
+                                'No options array found for poll:',
+                                poll
+                            );
+                        }
                     });
-                });
-                setVoteCounts(initialCounts);
+
+                    setVoteCounts(initialCounts);
+                    setTotalVotes(totalVoteCount);
+                } else {
+                    console.error('Unexpected data format:', data);
+                }
             })
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
