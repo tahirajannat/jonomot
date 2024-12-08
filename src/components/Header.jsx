@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 export default function Header() {
     return (
         <div>
-            <header class='bg-white'>
+            <header class='bg-secondary py-8'>
                 <nav
-                    class='container mx-auto flex items-center justify-between p-6 lg:px-8'
+                    class='container mx-auto flex items-center justify-between'
                     aria-label='Global'
                 >
                     <div class='flex lg:flex-1'>
@@ -17,7 +17,7 @@ export default function Header() {
                                 src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
                                 alt=''
                             /> */}
-                            <span className='text-indigo-600 text-2xl font-bold'>
+                            <span className='text-white text-2xl font-bold'>
                                 জনমত
                             </span>
                         </Link>
@@ -44,17 +44,17 @@ export default function Header() {
                             </svg>
                         </button>
                     </div>
-                    <div class='hidden lg:flex lg:gap-x-12'>
+                    <div class='hidden lg:flex lg:gap-x-12 text-white'>
                         <Link
                             to='/'
-                            className='text-base font-semibold leading-6 text-gray-900 border-b-2 border-indigo-600 hover:text-indigo-600 transition-all duration-300'
+                            className='text-base font-semibold leading-6 text-white border-b-2 border-primary hover:text-white transition-all duration-300'
                         >
                             ভোট
                         </Link>
 
                         <Link
                             to='/all-votes'
-                            class='text-base font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-all duration-300'
+                            class='text-base font-semibold leading-6 text-white hover:text-white transition-all duration-300'
                         >
                             সকল জনমত
                         </Link>
@@ -62,7 +62,7 @@ export default function Header() {
                     {/* <div class='hidden lg:flex lg:flex-1 lg:justify-end'>
                         <a
                             href='#'
-                            class='text-sm font-semibold leading-6 text-gray-900'
+                            class='text-sm font-semibold leading-6 text-white'
                         >
                             Log in <span aria-hidden='true'>&rarr;</span>
                         </a>
@@ -106,25 +106,25 @@ export default function Header() {
                                 <div class='space-y-2 py-6'>
                                     <a
                                         href='#'
-                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50'
                                     >
                                         Product
                                     </a>
                                     <a
                                         href='#'
-                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50'
                                     >
                                         Features
                                     </a>
                                     <a
                                         href='#'
-                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50'
                                     >
                                         Marketplace
                                     </a>
                                     <a
                                         href='#'
-                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                                        class='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50'
                                     >
                                         Company
                                     </a>
@@ -132,7 +132,7 @@ export default function Header() {
                                 <div class='py-6'>
                                     <a
                                         href='#'
-                                        class='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                                        class='-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50'
                                     >
                                         Log in
                                     </a>

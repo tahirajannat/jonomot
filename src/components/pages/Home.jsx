@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PollCard from '../PollCard';
 import Stats from '../Stats';
 import ProgressBar from '../common/ProgressBar';
+import Feature from '../section/Feature';
+import Hero from '../section/Hero';
+import Record from '../section/Record';
 
 export default function Home() {
     const [voteCounts, setVoteCounts] = useState({});
@@ -9,11 +12,17 @@ export default function Home() {
     const [pollData, setPollData] = useState([]);
     useEffect(() => {
         fetch('http://jonomot.nisalman.com/api/questions')
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then((data) => {
                 if (data.success && Array.isArray(data.data)) {
                     const polls = data.data;
                     setPollData(polls);
+                    console.log('pollData', pollData);
 
                     // Initialize vote counts
                     const initialCounts = {};
@@ -43,8 +52,13 @@ export default function Home() {
                     console.error('Unexpected data format:', data);
                 }
             })
-            .catch((error) => console.error('Error fetching data:', error));
+            .catch((error) => {
+                console.error('Error fetching data:', error.message);
+                console.error('Error details:', error);
+            });
     }, []);
+
+    console.log('pollData', pollData);
 
     const handleVote = (optionId) => {
         setVoteCounts((prevCounts) => ({
@@ -55,6 +69,9 @@ export default function Home() {
     };
     return (
         <>
+            <Hero />
+            <Feature />
+            <Record />
             <div className='container mx-auto xl:grid xl:grid-cols-12 gap-6 py-20 px-10 xl:px-0 '>
                 <div className='xl:col-span-7 mb-10 xl:mb-0'>
                     <PollCard
