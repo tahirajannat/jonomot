@@ -17,7 +17,7 @@ export default function Feature() {
                 <img
                     src={vectorImage}
                     alt=''
-                    className='absolute bottom-0 right-0 w-4/12'
+                    className='absolute bottom-0 right-0 w-4/12 '
                 />
                 <div className='xl:grid xl:grid-cols-3 gap-6 text-white'>
                     <div className='col-span-1 border border-primary p-6 rounded-lg mb-6 xl:my-0'>

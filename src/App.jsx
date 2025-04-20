@@ -8,7 +8,8 @@ import Home from './components/pages/Home';
 
 function App() {
     return (
-        <div className='bg-gray-100'>
+        <div className=''>
+            {/* <Test /> */}
             <Router>
                 <Header />
                 <Routes>

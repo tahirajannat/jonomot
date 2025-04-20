@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-export default function ProgressBar({
+export default function ProgressBarAfterVote({
     completedPercentage = '10%',
     stats,
     styles,
     index,
-    isChecked,
-    onCheckboxChange,
     id,
+    percentageColor,
+    progressbarColor,
 }) {
     const progressBarStyles = {
         width: completedPercentage,
@@ -34,33 +34,27 @@ export default function ProgressBar({
     };
 
     return (
-        <div className='my-4 flex space-x-3'>
-            <input
+        <div className='flex space-x-3 w-full sm:my-1.5'>
+            {/* <input
                 type='checkbox'
-                className='h-5 w-5 text-blue-500 focus:ring-blue-400 mt-1'
-                checked={isChecked}
-                onChange={onCheckboxChange}
-            />
-            {isChecked && <span className='text-green-500 text-lg'>✔</span>}
+                className='h-5 w-5 text-blue-500 focus:ring-blue-400 mt-1 text-ne'
+                disabled
+            /> */}
             <div className='w-full'>
-                <h3 className='flex justify-between mb-2 text-gray-700'>
+                <div className='flex justify-between mb-1 text-gray-700'>
                     <span className='text-xs sm:text-base lg:text-lg'>
                         {stats}
                     </span>
                     <span
-                        className={`text-xs sm:text-base lg:text-lg ${getPercentageColor(
-                            index
-                        )}`}
+                        className={`text-xs sm:text-base lg:text-lg ${percentageColor}`}
                     >
                         {completedPercentage}
                     </span>
-                </h3>
-                <div className='h-2.5 w-full bg-neutral-200 rounded'>
+                </div>
+                <div className='h-2.5 w-full bg-gray-200 rounded'>
                     <div
                         style={progressBarStyles}
-                        className={`h-2.5 rounded ${getProgressBarColor(
-                            index
-                        )}`}
+                        className={`h-2.5 rounded bg-green-500 ${progressbarColor}`}
                     ></div>
                 </div>
             </div>

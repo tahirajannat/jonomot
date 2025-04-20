@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap'); */
 body,
 p,
 h1,
@@ -16,7 +16,7 @@ h6 {
     font-style: normal;
 }
 .hero-image {
-    background-image: url('../src/assets/hero-bg.png');
+    background-image: url('../src/assets/jonomot_hero.png');
     /* height: 200px; */
     background-position: bottom;
     background-repeat: no-repeat;

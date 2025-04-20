@@ -9,7 +9,7 @@ export default function Record() {
                 <img
                     src={vectorImage}
                     alt=''
-                    className='absolute z-0 top-0 left-0 w-1/4'
+                    className='absolute z-0 top-0 left-0 w-1/4 '
                 />
                 <div className='xl:grid xl:grid-cols-2 gap-6 text-white'>
                     <div className='z-50'>

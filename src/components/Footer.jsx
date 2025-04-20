@@ -1,19 +1,16 @@
+import logo from '../assets/logoNew.png';
 import Social from './common/Social';
 
 export default function Footer() {
     return (
-        <section className=' bg-[#007b9a] relative'>
-            <div className=' container mx-auto md:flex gap-6 justify-between py-14 text-center xl:text-left'>
-                <div className='-mt-2 xl:w-2/6 mr-6 text-center xl:text-left text-accent'>
-                    <a href='https://flowbite.com' className='flex   '>
-                        {/* <img
-                            src={Logo}
-                            className='mr-3 sm:h-20 h-6 '
-                            alt='Flowbite Logo'
-                        /> */}
-                        <span className='text-accent text-2xl font-bold '>
-                            জনমত
-                        </span>
+        <section className=' bg-[#002D21] relative'>
+            <div className=' container mx-auto px-10 md:px-0 md:grid grid-cols-4 flex-wrap gap-6 pt-12 pb-6 md:py-14 text-center md:text-left'>
+                <div className='col-span-2 -mt-2 md:mr-6 text-center md:text-left text-accent my-6 md:my-0 border-b md:border-0 pb-4 md:pb-0'>
+                    <a
+                        href='https://flowbite.com'
+                        className='flex justify-center md:justify-start '
+                    >
+                        <img class='h-12 w-auto' src={logo} alt='' />
                     </a>
                     <div className='mt-4'>
                         <p className=' leading-8'>
@@ -23,7 +20,7 @@ export default function Footer() {
                         </p>
                     </div>
                 </div>
-                <div className='mr-auto'>
+                <div className='md:mr-auto col-span-1 my-6 md:my-0 border-b md:border-0 pb-4 md:pb-0'>
                     <h2 className='mb-4 text-lg text-accent font-bold leading-none '>
                         আমরা আছি
                     </h2>
@@ -34,15 +31,8 @@ export default function Footer() {
                     <h3 className='text-md text-accent'>প্রাইভেসি & পলিসি</h3>
                 </div>
                 {/* .... */}
-                <div className='mr-auto'>
-                    <h2 className='mb-5 text-lg text-accent font-bold leading-none'>
-                        আমাদের সাথে থাকুন
-                    </h2>
-                    <Social />
-                </div>
-                {/* .... */}
-                <div className='mr-auto'>
-                    <h2 className='mb-5 text-lg text-accent font-bold leading-none'>
+                <div className='mr-auto col-span-1 text-center md:text-left my-6 md:my-0'>
+                    <h2 className='mb-5 text-lg text-accent font-bold leading-none '>
                         আমাদের সাথে থাকুন
                     </h2>
                     <Social />
@@ -50,8 +40,8 @@ export default function Footer() {
             </div>
             <div className='bg-[#00596f]  mx-auto text-center py-5'>
                 <p className='text-accent'>
-                    © 2024{' '}
-                    <a className=' text-primary' href='#'>
+                    © 2025{' '}
+                    <a className=' text-red-300' href='#'>
                         jonomot.com
                     </a>
                     . All rights reserved.

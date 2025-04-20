@@ -1,31 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logoNew.png';
 
 export default function Header() {
     return (
         <div>
-            <header class='bg-secondary py-8'>
+            <header class='bg-secondary py-6'>
                 <nav
-                    class='container mx-auto flex items-center justify-between'
+                    class='container px-12 mx-auto flex items-center justify-between'
                     aria-label='Global'
                 >
                     <div class='flex lg:flex-1'>
-                        <Link to='/' class='-m-1.5 p-1.5'>
+                        <Link to='/' class='-m-1.5 '>
                             <span class='sr-only'>Your Company</span>
-                            {/* <img
-                                class='h-8 w-auto'
-                                src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                                alt=''
-                            /> */}
-                            <span className='text-white text-2xl font-bold'>
+                            <img class='h-12 w-auto' src={logo} alt='' />
+                            {/* <span className='text-white text-2xl font-bold'>
                                 জনমত
-                            </span>
+                            </span> */}
                         </Link>
                     </div>
                     <div class='flex lg:hidden'>
                         <button
                             type='button'
-                            class='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
+                            class='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black'
                         >
                             <span class='sr-only'>Open main menu</span>
                             <svg
@@ -44,17 +41,17 @@ export default function Header() {
                             </svg>
                         </button>
                     </div>
-                    <div class='hidden lg:flex lg:gap-x-12 text-white'>
+                    <div class='hidden lg:flex lg:gap-x-12 text-black'>
                         <Link
                             to='/'
-                            className='text-base font-semibold leading-6 text-white border-b-2 border-primary hover:text-white transition-all duration-300'
+                            className='text-base font-semibold leading-6 text-black border-b-2 border-primary hover:text-white transition-all duration-300'
                         >
                             ভোট
                         </Link>
 
                         <Link
                             to='/all-votes'
-                            class='text-base font-semibold leading-6 text-white hover:text-white transition-all duration-300'
+                            class='text-base font-semibold leading-6 text-black hover:text-white transition-all duration-300'
                         >
                             সকল জনমত
                         </Link>
