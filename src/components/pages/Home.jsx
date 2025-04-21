@@ -25,7 +25,7 @@ export default function Home() {
                 if (data.success && Array.isArray(data.data)) {
                     const polls = data.data;
                     setPollData(polls);
-                    console.log('pollData', pollData);
+                    // console.log('pollData', pollData);
 
                     // Initialize vote counts
                     const initialCounts = {};

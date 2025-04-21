@@ -13,7 +13,7 @@ export default function Record() {
                 />
                 <div className='xl:grid xl:grid-cols-2 gap-6 text-white'>
                     <div className='z-50'>
-                        <div class='text-left'>
+                        <div className='text-left'>
                             <p className='text-base tracking-wide font-thin text-primary '>
                                 Our Vision
                             </p>
@@ -21,25 +21,25 @@ export default function Record() {
                                 Users from all over the world
                             </h2>
 
-                            <p class='text-[#CFCFCF] my-5 pr-20'>
+                            <p className='text-[#CFCFCF] my-5 pr-20'>
                                 Learn more about our advanced analytics and
                                 decentralized financial tools designed for a
                                 future of stronger, secure, and smarter
                                 financial growth.
                             </p>
                         </div>
-                        <div class='flex space-x-8 mt-6'>
-                            <div class='text-center'>
-                                <p class='text-4xl font-bold'>32K+</p>
-                                <p class='text-[#CFCFCF]'>Users</p>
+                        <div className='flex space-x-8 mt-6'>
+                            <div className='text-center'>
+                                <p className='text-4xl font-bold'>32K+</p>
+                                <p className='text-[#CFCFCF]'>Users</p>
                             </div>
-                            <div class='text-center'>
-                                <p class='text-4xl font-bold'>250+</p>
-                                <p class='text-gray-400'>Partners</p>
+                            <div className='text-center'>
+                                <p className='text-4xl font-bold'>250+</p>
+                                <p className='text-gray-400'>Partners</p>
                             </div>
-                            <div class='text-center'>
-                                <p class='text-4xl font-bold'>87+</p>
-                                <p class='text-gray-400'>Key Countries</p>
+                            <div className='text-center'>
+                                <p className='text-4xl font-bold'>87+</p>
+                                <p className='text-gray-400'>Key Countries</p>
                             </div>
                         </div>
                     </div>

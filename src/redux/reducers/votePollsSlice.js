@@ -53,7 +53,10 @@ const votePollsSlice = createSlice({
             const poll = state.votePolls.find((p) => p.question_id === pollId);
             if (!poll) return;
 
-            if (!state.checkedStates) {
+            if (
+                !state.checkedStates ||
+                state.checkedStates.every((s) => s === false)
+            ) {
                 state.checkedStates = poll.options.map(() => false);
             }
 
@@ -62,15 +65,14 @@ const votePollsSlice = createSlice({
             );
             const isAlreadySelected = state.checkedStates[currentIndex];
 
-            // Unselect
-            if (isAlreadySelected) {
-                poll.options[currentIndex].vote -= 1;
-                state.checkedStates[currentIndex] = false;
-                state.hasVoted = false;
-                return;
+            const totalSelected = state.checkedStates.filter(Boolean).length;
+
+            // Prevent unselecting if it's the only one selected
+            if (isAlreadySelected && totalSelected === 1) {
+                return; // Don't allow removing the last selected option
             }
 
-            // Deselect previous
+            // Deselect previous selection
             const previousIndex = state.checkedStates.findIndex(
                 (v) => v === true
             );
@@ -78,7 +80,7 @@ const votePollsSlice = createSlice({
                 poll.options[previousIndex].vote -= 1;
             }
 
-            // Select new
+            // Select new option
             poll.options[currentIndex].vote += 1;
 
             // Update selection state
@@ -90,15 +92,16 @@ const votePollsSlice = createSlice({
 
         updateVotePolls(state, action) {
             state.votePolls = action.payload;
-            state.checkedStates = null;
-            state.hasVoted = false;
+            // state.checkedStates = null;
+            // state.hasVoted = false;
         },
     },
 });
+
+export const { voteForOption, updateVotePolls } = votePollsSlice.actions;
 
 export const selectVotePolls = (state) => state.votePolls.votePolls;
 export const selectHasVoted = (state) => state.votePolls.hasVoted;
 export const selectCheckedStates = (state) => state.votePolls.checkedStates;
 
-export const { voteForOption, updateVotePolls } = votePollsSlice.actions;
 export default votePollsSlice.reducer;

@@ -10,7 +10,7 @@ export default function Footer() {
                         href='https://flowbite.com'
                         className='flex justify-center md:justify-start '
                     >
-                        <img class='h-12 w-auto' src={logo} alt='' />
+                        <img className='h-12 w-auto' src={logo} alt='' />
                     </a>
                     <div className='mt-4'>
                         <p className=' leading-8'>

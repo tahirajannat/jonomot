@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -39,21 +39,98 @@ export default function Option() {
         return colors[index % colors.length];
     };
 
-    const handleCheckboxChange = (optionId) => {
-        dispatch(voteForOption({ pollId: poll.question_id, optionId }));
-        console.log('optionId: ', optionId);
-    };
+    //     console.log('optionId: ', optionId);
+    //     try {
+    //         const response = await fetch(
+    //             `http://jonomot.nisalman.com/api/options/${optionId}/vote`,
+    //             {
+    //                 method: 'PUT',
+    //             }
+    //         );
+
+    //         if (!response.ok) {
+    //             throw new Error('Failed to submit vote');
+    //         }
+
+    //         const result = await response.json();
+    //         console.log('Vote submitted:', result);
+    //     } catch (err) {
+    //         console.error('Voting error:', err.message);
+    //     }
+    // };
 
     // Limit to the first 4 options for display
+    // Restore saved vote from localStorage
+    useEffect(() => {
+        const savedVote = localStorage.getItem(`votedPoll_${poll.question_id}`);
+        if (savedVote) {
+            const { optionId } = JSON.parse(savedVote);
+            dispatch(voteForOption({ pollId: poll.question_id, optionId }));
+        }
+    }, [dispatch, poll.question_id]);
+
+    const handleCheckboxChange = async (optionId, index) => {
+        const pollId = poll.question_id;
+        const savedVote = JSON.parse(
+            localStorage.getItem(`votedPoll_${pollId}`)
+        );
+        const previousOptionId = savedVote?.optionId;
+
+        // skip the API call if user selects the same option again
+        if (optionId === previousOptionId) {
+            console.log('Same option selected again – skip');
+            return;
+        }
+
+        // Update Redux state
+        dispatch(voteForOption({ pollId, optionId }));
+
+        try {
+            // Send the "vote-up" for the new option
+            const voteUpResponse = await fetch(
+                `http://jonomot.nisalman.com/api/options/${optionId}/vote-up`,
+                {
+                    method: 'PUT',
+                }
+            );
+            if (!voteUpResponse.ok) {
+                throw new Error('Failed to vote up');
+            }
+            if (previousOptionId) {
+                const voteDownResponse = await fetch(
+                    `http://jonomot.nisalman.com/api/options/${previousOptionId}/vote-down`,
+                    {
+                        method: 'PUT',
+                    }
+                );
+
+                // Check if the vote-down request was successful
+                if (!voteDownResponse.ok) {
+                    throw new Error('Failed to vote down');
+                }
+            }
+
+            // Save the new vote to localStorage
+            localStorage.setItem(
+                `votedPoll_${pollId}`,
+                JSON.stringify({ optionId })
+            );
+
+            console.log('Vote successfully submitted and updated');
+        } catch (err) {
+            console.error('Error submitting vote:', err.message);
+        }
+    };
+
     const displayedOptions = poll.options;
 
-    // Calculate total votes for the displayed options only
+    // Calculate total votes
     const totalVotes = displayedOptions.reduce(
         (sum, option) => sum + (option.vote || 0),
         0
     );
 
-    // Normalize percentages for the displayed options
+    // Normalize percentages
     const normalizedOptions = displayedOptions.map((option) => ({
         ...option,
         percentage:
@@ -77,6 +154,7 @@ export default function Option() {
                             <div className='relative'>
                                 <input
                                     type='checkbox'
+                                    // disabled={hasVoted}
                                     id={`checkbox-${option.option_id}`}
                                     className='peer appearance-none w-4 h-4 sm:h-7 sm:w-8 border-2 border-gray-400 rounded bg-white checked:bg-primary checked:border-primary focus:outline-none'
                                     checked={
@@ -85,7 +163,10 @@ export default function Option() {
                                             : false
                                     }
                                     onChange={() =>
-                                        handleCheckboxChange(option.option_id)
+                                        handleCheckboxChange(
+                                            option.option_id,
+                                            index
+                                        )
                                     }
                                 />
                                 <FaCheckCircle className='absolute text-dark text-xs sm:text-lg top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 peer-checked:opacity-100' />
