@@ -11,13 +11,13 @@ export default function Hero() {
                     <img
                         src={bdMap}
                         alt=''
-                        className='z-0 absolute  xl:-bottom-24 2xl:-bottom-44 -right-0 lg:right-0 w-1/2 lg:w-full xl:p-8 2xl:p-24 hidden sm:block'
+                        className='z-0 absolute  xl:-bottom-40 2xl:-bottom-72 -right-0 lg:right-0 w-1/2 lg:w-full xl:p-8 2xl:p-24 hidden lg:block'
                     />
                 </div>
 
                 {/* Right Image */}
                 <div className='col-span-5 xl:my-6 lg:mt-0  justify-center z-20'>
-                    <div className=' mt-4 xl:mt-20'>
+                    <div className=' mt-4 xl:mt-10'>
                         <VotePoll />
                     </div>
                 </div>

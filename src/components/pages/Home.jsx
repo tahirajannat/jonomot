@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ProgressBar from '../common/ProgressBar';
+import Feature from '../section/Feature';
 import Hero from '../section/Hero';
 
 export default function Home() {
@@ -61,7 +61,7 @@ export default function Home() {
             });
     }, []);
 
-    console.log('pollData', pollData);
+    // console.log('pollData', pollData);
 
     const handleVote = (optionId) => {
         setVoteCounts((prevCounts) => ({
@@ -109,66 +109,7 @@ export default function Home() {
                     />
                 </div>
             </div> */}
-            <div className='bg-secondary py-16 mt-32'>
-                <div className=' container mx-auto px-4 sm:px-0'>
-                    <h2 className='text-2xl font-semibold mb-10 xl:mb-14 pb-2 inline-block border-b-2 border-indigo-500'>
-                        সর্বশেষ ভোটিং স্ট্যাটস
-                    </h2>
-
-                    <div className='xl:grid xl:grid-cols-3 gap-6 '>
-                        <div className='col-span-1 bg-white shadow-lg rounded-lg p-6 mb-6 xl:my-0'>
-                            <h2 className='text-lg font-semibold border-b pb-2'>
-                                কে বেশি ভয়ানক?
-                            </h2>
-                            {normalizedOptions.map((option, index) => (
-                                <ProgressBar
-                                    key={index}
-                                    stats={option.label}
-                                    completedPercentage={`${option.percentage}%`} // Convert back to string with % for display
-                                    index={index}
-                                    styles={{
-                                        transition: 'width 0.3s ease-in-out',
-                                    }} // Optional custom style
-                                />
-                            ))}
-                        </div>
-                        {/* ... */}
-                        <div className='col-span-1 bg-white p-6 shadow-lg rounded-lg mb-6 xl:my-0'>
-                            <h2 className='text-lg font-semibold border-b pb-2'>
-                                কে বেশি ভয়ানক?
-                            </h2>
-                            {normalizedOptions.map((option, index) => (
-                                <ProgressBar
-                                    key={index}
-                                    stats={option.label}
-                                    completedPercentage={`${option.percentage}%`} // Convert back to string with % for display
-                                    index={index}
-                                    styles={{
-                                        transition: 'width 0.3s ease-in-out',
-                                    }} // Optional custom style
-                                />
-                            ))}
-                        </div>
-                        {/* ... */}
-                        <div className='col-span-1 bg-white p-6 shadow-lg rounded-lg mb-6 xl:my-0'>
-                            <h2 className='text-lg font-semibold border-b pb-2'>
-                                কে বেশি ভয়ানক?
-                            </h2>
-                            {normalizedOptions.map((option, index) => (
-                                <ProgressBar
-                                    key={index}
-                                    stats={option.label}
-                                    completedPercentage={`${option.percentage}%`} // Convert back to string with % for display
-                                    index={index}
-                                    styles={{
-                                        transition: 'width 0.3s ease-in-out',
-                                    }} // Optional custom style
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Feature />
         </>
     );
 }

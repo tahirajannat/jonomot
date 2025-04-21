@@ -5,6 +5,7 @@ export default function ProgressBarAfterVote({
     styles,
     index,
     id,
+    className,
     percentageColor,
     progressbarColor,
 }) {
@@ -34,13 +35,13 @@ export default function ProgressBarAfterVote({
     };
 
     return (
-        <div className='flex space-x-3 w-full sm:my-1.5'>
+        <div className='flex space-x-3 w-full sm:my-0.5'>
             {/* <input
                 type='checkbox'
                 className='h-5 w-5 text-blue-500 focus:ring-blue-400 mt-1 text-ne'
                 disabled
             /> */}
-            <div className='w-full'>
+            <div className={`w-full `}>
                 <div className='flex justify-between mb-1 text-gray-700'>
                     <span className='text-xs sm:text-base lg:text-lg'>
                         {stats}
@@ -54,7 +55,7 @@ export default function ProgressBarAfterVote({
                 <div className='h-2.5 w-full bg-gray-200 rounded'>
                     <div
                         style={progressBarStyles}
-                        className={`h-2.5 rounded bg-green-500 ${progressbarColor}`}
+                        className={`h-2.5 rounded ${progressbarColor}`}
                     ></div>
                 </div>
             </div>

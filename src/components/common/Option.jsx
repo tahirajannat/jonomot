@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    selectCheckedStates,
+    selectHasVoted,
+    selectVotePolls,
+    voteForOption,
+} from '../../redux/reducers/votePollsSlice';
 import ProgressBarAfterVote from './ProgressBarAfterVote';
 import SocialShare from './SocialShare';
 
 export default function Option() {
-    const [pollOptions, setPollOptions] = useState([
-        { label: 'যে দল ১৫ বছর ধরে খেয়ে গেল', votes: 5 },
-        { label: 'যে দল ১৫ বছর ধরে কিছু খেতে পারে নাই', votes: 3 },
-        { label: 'উভয়েই অনেক বেশি ভয়ানক', votes: 2 },
-        { label: 'নতুন সরকার বেশি ভয়ানক হবে', votes: 1 },
-    ]);
+    const dispatch = useDispatch();
+    const votePolls = useSelector(selectVotePolls);
+    const hasVoted = useSelector(selectHasVoted);
+    const checkedStates = useSelector(selectCheckedStates);
+
+    const poll = votePolls[0];
+    if (!poll) return null;
 
     const getProgressBarColor = (index) => {
         const colors = [
@@ -18,93 +26,75 @@ export default function Option() {
             'bg-orange-500',
             'bg-indigo-600',
         ];
-
-        return colors[index % 4];
+        return colors[index % colors.length];
     };
+
     const getPercentageColor = (index) => {
-        const percentageColors = [
+        const colors = [
             'text-dark',
             'text-primary',
             'text-orange-500',
             'text-indigo-600',
         ];
-        return percentageColors[index % 4];
+        return colors[index % colors.length];
     };
 
-    // State to track checked status for each option
-    const [checkedStates, setCheckedStates] = useState(
-        pollOptions.map(() => false)
-    );
-
-    const [hasVoted, setHasVoted] = useState(() => {
-        return localStorage.getItem('hasVoted') === 'true';
-    });
-
-    const handleCheckboxChange = (index) => {
-        if (checkedStates[index]) {
-            return; // Do nothing if the option is already selected
-        }
-        const previousCheckedIndex = checkedStates.findIndex(
-            (state) => state === true
-        );
-        const updatedOptions = [...pollOptions];
-
-        if (previousCheckedIndex !== -1 && previousCheckedIndex !== index) {
-            // Undo the previous vote
-            updatedOptions[previousCheckedIndex].votes -= 1;
-        }
-
-        // Apply the new vote
-        updatedOptions[index].votes += 1;
-
-        // Update checked states (single selection)
-        const newCheckedStates = checkedStates.map((_, i) => i === index);
-        setCheckedStates(newCheckedStates);
-        setPollOptions(updatedOptions);
-
-        // Update voting status
-        setHasVoted(true);
-        localStorage.setItem('hasVoted', 'true');
+    const handleCheckboxChange = (optionId) => {
+        dispatch(voteForOption({ pollId: poll.question_id, optionId }));
+        console.log('optionId: ', optionId);
     };
 
-    // Calculate the total votes
-    const totalVotes = pollOptions.reduce(
-        (sum, option) => sum + option.votes,
+    // Limit to the first 4 options for display
+    const displayedOptions = poll.options;
+
+    // Calculate total votes for the displayed options only
+    const totalVotes = displayedOptions.reduce(
+        (sum, option) => sum + (option.vote || 0),
         0
     );
 
-    // Normalize percentages to sum to 100%
-    const normalizedOptions = pollOptions.map((option) => ({
+    // Normalize percentages for the displayed options
+    const normalizedOptions = displayedOptions.map((option) => ({
         ...option,
         percentage:
-            totalVotes > 0 ? ((option.votes / totalVotes) * 100).toFixed(2) : 0,
+            totalVotes > 0
+                ? ((option.vote / totalVotes) * 100).toFixed(2)
+                : '0.00',
     }));
 
-    const isAnyChecked = checkedStates.includes(true);
-    console.log('isAnyChecked', isAnyChecked);
+    const isAnyChecked = checkedStates?.includes(true);
 
     return (
         <div className='bg-white'>
             {/* Poll Options */}
-            <div className='space-y-3 border-b py-6'>
-                {normalizedOptions.map((option, index) => (
-                    <div key={index} className='flex items-center space-x-3'>
+            <div className='space-y-3 border-b h-72 content-center'>
+                {normalizedOptions.slice(0, 4).map((option, index) => (
+                    <div
+                        key={option.option_id}
+                        className='flex items-center space-x-3'
+                    >
                         <div className='flex items-center space-x-2'>
                             <div className='relative'>
                                 <input
                                     type='checkbox'
-                                    id={`checkbox-${index}`}
-                                    className='peer appearance-none w-4 h-4 sm:h-7 sm:w-8 border-2 border-gray-400 rounded bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none'
-                                    checked={checkedStates[index]}
-                                    onChange={() => handleCheckboxChange(index)}
-                                    readOnly
+                                    id={`checkbox-${option.option_id}`}
+                                    className='peer appearance-none w-4 h-4 sm:h-7 sm:w-8 border-2 border-gray-400 rounded bg-white checked:bg-primary checked:border-primary focus:outline-none'
+                                    checked={
+                                        checkedStates
+                                            ? checkedStates[index]
+                                            : false
+                                    }
+                                    onChange={() =>
+                                        handleCheckboxChange(option.option_id)
+                                    }
                                 />
                                 <FaCheckCircle className='absolute text-dark text-xs sm:text-lg top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 peer-checked:opacity-100' />
                             </div>
                         </div>
+
                         {isAnyChecked && hasVoted ? (
                             <ProgressBarAfterVote
-                                stats={option.label}
+                                stats={option.title}
                                 completedPercentage={`${option.percentage}%`}
                                 styles={{
                                     transition: 'width 0.3s ease-in-out',
@@ -112,20 +102,20 @@ export default function Option() {
                                 percentageColor={`text-sm my-1 ${getPercentageColor(
                                     index
                                 )}`}
-                                progressbarColor={`text-sm my-1 ${getProgressBarColor(
+                                progressbarColor={`text-sm my-0.5 ${getProgressBarColor(
                                     index
                                 )}`}
                             />
                         ) : (
-                            <div className=''>
-                                <label className='text-gray-700 my-4 text-xs sm:text-base lg:text-lg'>
-                                    {option.label}
+                            <div>
+                                <label className='text-gray-700 text-xs sm:text-base lg:text-lg'>
+                                    {option.title}
                                 </label>
                                 <h6
                                     className={`text-sm my-1 ${
                                         index % 2 === 0
-                                            ? 'text-red-500'
-                                            : 'text-green-500'
+                                            ? 'text-dark'
+                                            : 'text-primary'
                                     }`}
                                 >
                                     {option.percentage}% of votes
