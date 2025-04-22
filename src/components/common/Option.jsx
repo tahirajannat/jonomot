@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,6 +15,7 @@ export default function Option() {
     const votePolls = useSelector(selectVotePolls);
     const hasVoted = useSelector(selectHasVoted);
     const checkedStates = useSelector(selectCheckedStates);
+    const [showAlert, setShowAlert] = useState(false);
 
     const poll = votePolls[0];
     if (!poll) return null;
@@ -92,7 +93,21 @@ export default function Option() {
                 {
                     method: 'PUT',
                 }
+                // alert('আপনার মতামত গৃহীত হয়েছে')
             );
+            // Check if the response was successful (status code 200)
+            if (voteUpResponse.ok) {
+                // Show success alert
+                setShowAlert(true);
+
+                // Automatically hide after 4 seconds
+                setTimeout(() => {
+                    setShowAlert(false);
+                }, 4000);
+            } else {
+                // Handle error or failed response (optional)
+                console.error('Failed to vote up');
+            }
             if (!voteUpResponse.ok) {
                 throw new Error('Failed to vote up');
             }
@@ -172,6 +187,23 @@ export default function Option() {
                                 <FaCheckCircle className='absolute text-dark text-xs sm:text-lg top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 peer-checked:opacity-100' />
                             </div>
                         </div>
+                        {/* Custom Alert Box */}
+                        {showAlert && (
+                            <div className='absolute top-20 right-0 transform -translate-x-1/2 w-full max-w-sm p-4 bg-red-200 text-primary border-l-4 border-green-600 rounded-md shadow-lg mt-4'>
+                                <div className='flex items-center'>
+                                    <FaCheckCircle className='text-xl' />
+                                    <p className='text-base font-semibold ml-4'>
+                                        আপনার মতামত গৃহীত হয়েছে
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setShowAlert(false)}
+                                    className='absolute top-1 right-4 text-dark hover:text-red-400'
+                                >
+                                    ×
+                                </button>
+                            </div>
+                        )}
 
                         {isAnyChecked && hasVoted ? (
                             <ProgressBarAfterVote
