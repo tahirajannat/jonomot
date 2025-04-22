@@ -66,12 +66,15 @@ export default function AllJonomot() {
     }, [dispatch]);
 
     return (
-        <div className='bg-white py-16'>
-            <div className='container mx-auto  px-6 md:px-12 '>
-                <h2 className='text-2xl font-semibold mb-10 xl:mb-14 pb-2 inline-block border-b-2 border-indigo-500'>
-                    পূর্ববর্তী সকল জনমত স্ট্যাটস
-                </h2>
-
+        <div className='bg-white py-16 '>
+            <div className='bg-white py-32 hero-image mb-20 '>
+                <div className='flex flex-wrap justify-center items-center content-center'>
+                    <h2 className='text-2xl font-semibold mb-10 xl:mb-14 pb-2 inline-block border-b-2 border-indigo-500 items-center text-center text-white'>
+                        পূর্ববর্তী সকল জনমত স্ট্যাটস
+                    </h2>
+                </div>
+            </div>
+            <div className='container mx-auto  px-6 md:px-12  -mt-48 mb-10'>
                 <div className='xl:grid xl:grid-cols-3 gap-6'>
                     {votePolls.slice(0, 6).map((poll) => {
                         const totalVotes = poll.options.reduce(
