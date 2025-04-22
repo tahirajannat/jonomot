@@ -34,7 +34,7 @@ export default function Footer() {
 
     return (
         <section className='bg-[#002D21] relative'>
-            <div className='container mx-auto px-10 md:px-0 md:grid grid-cols-4 gap-10 pt-8 pb-6 md:py-10 text-center md:text-left'>
+            <div className='container mx-auto  px-6 md:px-12  md:grid grid-cols-4 gap-2 lg:gap-10 pt-8 pb-6 md:py-10 text-center md:text-left'>
                 <div className='col-span-2 -mt-2 md:mr-6 text-center md:text-left text-accent my-6 md:my-0 border-b md:border-0 pb-4 md:pb-0'>
                     <Link
                         to='/'
@@ -100,7 +100,7 @@ export default function Footer() {
             {isVisible && (
                 <button
                     onClick={scrollToTop}
-                    className='fixed bottom-10 right-10 bg-primary text-dark p-3 text-lg rounded-full shadow-lg hover:bg-green-700 hover:text-accent transition-all duration-300'
+                    className='fixed bottom-10 right-10 bg-primary text-dark p-3 text-lg rounded-full shadow-lg hover:bg-green-700 hover:text-accent transition-all duration-300 z-50'
                 >
                     <FaArrowUp />
                 </button>

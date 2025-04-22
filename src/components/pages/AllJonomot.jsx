@@ -67,7 +67,7 @@ export default function AllJonomot() {
 
     return (
         <div className='bg-white py-16'>
-            <div className='container mx-auto px-4 sm:px-0'>
+            <div className='container mx-auto  px-6 md:px-12 '>
                 <h2 className='text-2xl font-semibold mb-10 xl:mb-14 pb-2 inline-block border-b-2 border-indigo-500'>
                     পূর্ববর্তী সকল জনমত স্ট্যাটস
                 </h2>

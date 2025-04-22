@@ -1,9 +1,10 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logoNew.png';
 
 export default function Header() {
     const location = useLocation();
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div>
@@ -18,9 +19,11 @@ export default function Header() {
                             <img className='h-12 w-auto' src={logo} alt='' />
                         </Link>
                     </div>
+                    {/* Mobile Toggle Button */}
                     <div className='flex lg:hidden'>
                         <button
                             type='button'
+                            onClick={() => setIsOpen(!isOpen)}
                             className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black'
                         >
                             <span className='sr-only'>Open main menu</span>
@@ -40,6 +43,49 @@ export default function Header() {
                             </svg>
                         </button>
                     </div>
+
+                    {/* Mobile Menu Panel */}
+                    {isOpen && (
+                        <div className='absolute top-20 left-0 w-full bg-white shadow-lg z-50 lg:hidden transition-all duration-100'>
+                            <nav className='flex flex-col space-y-4 p-6'>
+                                <Link
+                                    to='/'
+                                    onClick={() => setIsOpen(false)}
+                                    className={`text-base font-semibold leading-6 transition-all duration-300 ${
+                                        location.pathname === '/'
+                                            ? 'text-dark border-b-2 border-primary'
+                                            : 'text-black hover:text-dark'
+                                    }`}
+                                >
+                                    ভোট
+                                </Link>
+
+                                <Link
+                                    to='/all-votes'
+                                    onClick={() => setIsOpen(false)}
+                                    className={`text-base font-semibold leading-6 text-black stransition-all duration-300 ${
+                                        location.pathname === '/all-votes'
+                                            ? 'text-dark border-b-2 border-primary'
+                                            : 'text-black hover:text-dark'
+                                    }`}
+                                >
+                                    সকল জনমত
+                                </Link>
+                                <Link
+                                    to='/july-biplob'
+                                    onClick={() => setIsOpen(false)}
+                                    className={`text-base font-semibold leading-6 text-black  transition-all duration-300 ${
+                                        location.pathname === '/july-biplob'
+                                            ? 'text-dark border-b-2 border-primary'
+                                            : 'text-black hover:text-dark'
+                                    }`}
+                                >
+                                    জুলাই বিপ্লব
+                                </Link>
+                                {/* Add more links as needed */}
+                            </nav>
+                        </div>
+                    )}
                     <div className='hidden lg:flex lg:gap-x-12 text-black'>
                         <Link
                             to='/'
