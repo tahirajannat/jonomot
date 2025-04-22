@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logoNew.png';
 
 export default function Header() {
+    const location = useLocation();
+
     return (
         <div>
             <header className='bg-secondary py-6'>
@@ -14,9 +16,6 @@ export default function Header() {
                         <Link to='/' className='-m-1.5 '>
                             <span className='sr-only'>Your Company</span>
                             <img className='h-12 w-auto' src={logo} alt='' />
-                            {/* <span className='text-white text-2xl font-bold'>
-                                জনমত
-                            </span> */}
                         </Link>
                     </div>
                     <div className='flex lg:hidden'>
@@ -44,16 +43,34 @@ export default function Header() {
                     <div className='hidden lg:flex lg:gap-x-12 text-black'>
                         <Link
                             to='/'
-                            className='text-base font-semibold leading-6 text-black border-b-2 border-primary hover:text-white transition-all duration-300'
+                            className={`text-base font-semibold leading-6 transition-all duration-300 ${
+                                location.pathname === '/'
+                                    ? 'text-dark border-b-2 border-primary'
+                                    : 'text-black hover:text-dark'
+                            }`}
                         >
                             ভোট
                         </Link>
 
                         <Link
                             to='/all-votes'
-                            className='text-base font-semibold leading-6 text-black hover:text-white transition-all duration-300'
+                            className={`text-base font-semibold leading-6 text-black stransition-all duration-300 ${
+                                location.pathname === '/all-votes'
+                                    ? 'text-dark border-b-2 border-primary'
+                                    : 'text-black hover:text-dark'
+                            }`}
                         >
                             সকল জনমত
+                        </Link>
+                        <Link
+                            to='/july-biplob'
+                            className={`text-base font-semibold leading-6 text-black  transition-all duration-300 ${
+                                location.pathname === '/july-biplob'
+                                    ? 'text-dark border-b-2 border-primary'
+                                    : 'text-black hover:text-dark'
+                            }`}
+                        >
+                            জুলাই বিপ্লব
                         </Link>
                     </div>
                     {/* <div className='hidden lg:flex lg:flex-1 lg:justify-end'>

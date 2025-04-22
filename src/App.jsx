@@ -5,6 +5,7 @@ import SignIn from './components/adminAuth/SignIn';
 import Dashboard from './components/dashboard/Dashboard';
 import AllJonomot from './components/pages/AllJonomot';
 import Home from './components/pages/Home';
+import JulyBiplob from './components/pages/JulyBiplob';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/all-votes' element={<AllJonomot />} />
+                    <Route path='/july-biplob' element={<JulyBiplob />} />
                     <Route path='/sign-in' element={<SignIn />} />
                     <Route path='/dashboard/*' element={<Dashboard />} />
                 </Routes>
